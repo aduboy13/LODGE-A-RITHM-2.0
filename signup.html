@@ -30,6 +30,29 @@
 	  border: 1px solid #ccc;
 	  box-sizing: border-box;
 	}
+	.auto-style2 {
+	font-size: x-large;
+	font-family: "Times New Roman", Times, serif;
+}
+.auto-style4 {
+	color: #9EE0FF;
+}
+.auto-style7 {
+	color: #FFFFFF;
+}
+.auto-style8 {
+	color: #000000;
+}
+.auto-style9 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 18pt;
+	font-weight: bold;
+	color: #00887A;
+}
+.auto-style10 {
+	font-weight: bold;
+	color: #00887A;
+}
 	</style>
 
 	<!--[if lt IE 9]>
@@ -75,21 +98,252 @@
 						<div class="col-xl-6 col-lg-7" style="left: 0px; top: 0px" >
 
 
-<form action="login.php" method="POST">
-    <div class="container">
-    <label for="uname" ><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+<head>
+<h1 class="auto-style4">Sign Up Form</h1>
+<script type='text/javascript'>
+function formValidation()
+{
+var uid = document.form1.userid;
+var passid = document.form1.passid;
+var uname = document.form1.username;
+var uadd = document.form1.address;
+var ucountry = document.form1.country;
+var uzip = document.form1.zip;
+var uemail = document.form1.email;
+var umsex = document.form1.msex;
+var ufsex = document.form1.fsex;
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+	if(userid_validation(uid,5,12))
+          {
+             if(userid_validation(passid,7,12))
+               {
+ 	        if(allLetter(uname))
+                  {
+        if(alphanumeric(uadd))
+              {  
+              if(countryselect(ucountry))
+                {
+                  if(allnumeric(uzip))
+                    {
+                      if(ValidateEmail(uemail))
+                         {
+                          if(validsex(umsex,ufsex))
+                         {
+window.location="form-valid.html";
+}
+}
 
-      <input type="submit" class="site-btn sb-solid" value="LOGIN">
-    	<span lang="en-in"><span class="text-white"><strong>&nbsp;OR</strong></span>
+}
+ }	
+   }
+     }
+       }
+         }
+return false;
+}
 
-      <input type="submit" class="site-btn sb-solid" value="SIGN UP"></span></div>
+
+function userid_validation(uid,mx,my)
+{
+var uid_len = uid.value.length;
+if (uid_len == 0 || uid_len >= my || uid_len < mx)
+{
+alert("It should not be empty / length be between "+mx+" to "+my);
+uid.focus();
+return false;
+}
+return true;
+}
 
 
-  </form>
+function allLetter(uname)
+{ 
+var letters = /^[A-Za-z]+$/;
+if(uname.value.match(letters))
+{
+return true;
+}
+else
+{
+alert('Please input alphabet characters only');
+uname.focus();
+return false;
+}
+}
+
+
+function alphanumeric(uadd)
+{ 
+var letters = /^[0-9a-zA-Z]+$/;
+if(uadd.value.match(letters))
+{
+return true;
+}
+else
+{
+alert('Please input alphanumeric characters only');
+uadd.focus();
+return false;
+}
+}
+
+
+function countryselect(ucountry)
+       {
+	if(ucountry.value == "PS")
+                 {
+		alert('Select your country from the list');
+		ucountry.focus();
+		return false;
+	}
+        else
+        {
+		return true;
+	}
+}
+
+
+function allnumeric(uzip)
+ { 
+      var numbers = /^[0-9]+$/;
+       if(uzip.value.match(numbers))
+          {
+            return true;
+           }
+       else
+            {
+             alert('Please input numeric characters only');
+             uzip.focus();
+             return false;
+             }
+   }
+
+
+function ValidateEmail(uemail)
+{
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+if(uemail.value.match(mailformat))
+{
+return true;
+}
+else
+{
+alert("You have entered an invalid email address!");
+uemail.focus();
+return false;
+}
+}
+
+function validsex(umsex,ufsex)
+{
+ x=0;
+       
+	if(umsex.checked) 
+        {
+	x++;
+	}
+
+        if(ufsex.checked)
+        {
+        x++; 
+	}
+     if(x==0)
+       {
+	alert('Select Male/Female');
+		umsex.focus();
+		return false;
+        }
+        else
+        {
+	return true;
+		
+	}
+
+}
+</script>
+</head>
+<body>
+<form name='form1' onsubmit='return formValidation()' >
+<table cellpadding="3" style="border-collapse: collapse; width: 629px;">
+  <tr>
+    <td class="auto-style7" style="width: 191px"><strong>User id </strong> </td>
+	<td>
+	<input type="text" name="userid" size="12" style="width: 205px; height: 39px"  /></td>
+  </tr>
+  <tr>
+    <td class="auto-style7" style="width: 191px"><strong>Password</strong></td>
+	<td>
+	<input type="password" name="passid" size="12" style="width: 201px; height: 39px" /></td>
+  </tr>
+  <tr>
+    <td class="auto-style7" style="width: 191px"><strong>Name</strong></td>
+	<td>
+	<input type="text" name="username" size="50" style="height: 39px; width: 308px" /></td>
+  </tr>
+  <tr>
+    <td class="auto-style7" style="width: 191px"><strong>Address</strong></td>
+	<td>
+	<input type="text" name="address" size="50" style="width: 308px; height: 39px" /></td>
+  </tr>
+  <tr>
+    <td class="auto-style7" style="width: 191px"><strong>Country</strong></td>
+    <td><select id="country" name="country">
+       <option selected="" value="PS">(Please select a country)</option>
+     <option value="--">none</option>
+    <option value="AF">Afghanistan</option>
+     <option value="AL">Albania</option>
+       <option value="DZ">Algeria</option>
+        <option value="AS">American Samoa</option>
+       <option value="AD">Andorra</option>
+     <option value="AO">Angola</option>
+         <option value="BW">Botswana</option>
+      <option value="BV">Bouvet Island</option>
+          <option value="WF">Wallis and Futuna Islands</option>
+      <option value="EH">Western Sahara</option>
+      <option value="YE">Yemen</option>
+      <option value="YU">Yugoslavia</option>
+      <option value="ZM">Zambia</option>
+      <option value="ZW">Zimbabwe</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td class="auto-style7" style="width: 191px"><strong>ZIP Code </strong> </td>
+	<td><input type="text" name="zip" style="width: 139px; height: 39px" /></td>
+  </tr>
+  <tr>
+    <td class="auto-style7" style="width: 191px"><strong>Email</strong></td>
+	<td>
+	<input type="text" name="email" size="50" style="width: 311px; height: 39px" /></td>
+  </tr>
+  <tr>
+    <td class="auto-style7" style="height: 39px; width: 191px"><strong>Sex</strong></td>
+	<td style="height: 39px"><input type="radio" name="msex" value="Male" /><span class="auto-style8"> Male
+	</span>
+<input type="radio" name="fsex" value="Female" /><span class="auto-style8"> Female</span></td>
+  </tr>
+  <tr>
+    <td class="auto-style7" style="width: 191px"><strong>Language preference</strong></td>
+    <td><input type="checkbox" name="en" value="en" checked /><span class="auto-style8">English
+	</span>
+<input type="checkbox" name="nonen" value="noen" /><span class="auto-style8">Non English</span></td>
+  </tr>
+  <tr>
+    <td class="auto-style7" style="width: 191px"><strong>
+	<span class="auto-style7">Write about yourself</span><br class="auto-style7">
+      <span class="auto-style7">(optional)</span></strong></td>
+    <td><textarea name="desc" rows="4" cols="40" class="auto-style8"></textarea></td>
+  </tr>
+  <tr>
+     <td style="width: 191px">&nbsp;</td>
+    <td>
+	<strong>
+	<input type="submit" name="submit" value="Submit" style="width: 134px; height: 41px" class="auto-style9" /></strong><span class="auto-style2"><strong><input type="reset" name="submit0" value="Reset" style="width: 134px; height: 41px" class="auto-style10" /></strong></span></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</form>
+</body>
+						</div>
 </div>
 
 
