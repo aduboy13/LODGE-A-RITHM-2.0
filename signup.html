@@ -113,9 +113,9 @@ var uemail = document.form1.email;
 var umsex = document.form1.msex;
 var ufsex = document.form1.fsex;
 
-	if(userid_validation(uid,5,12))
+	if(userid_validation(uid,1,12))
           {
-             if(userid_validation(passid,7,12))
+             if(userid_validation(passid,1,12))
                {
  	        if(allLetter(uname))
                   {
@@ -158,7 +158,7 @@ return true;
 
 function allLetter(uname)
 { 
-var letters = /^[A-Za-z]+$/;
+var letters = /^[A-Za-z ]+$/;
 if(uname.value.match(letters))
 {
 return true;
@@ -174,7 +174,7 @@ return false;
 
 function alphanumeric(uadd)
 { 
-var letters = /^[0-9a-zA-Z]+$/;
+var letters = /^[0-9a-zA-Z ]+$/;
 if(uadd.value.match(letters))
 {
 return true;
