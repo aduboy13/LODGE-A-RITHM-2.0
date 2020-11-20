@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>ROOM SERVICE</title>
+
+	<!-- Favicon -->
+	<link href="img/favico.png" rel="shortcut icon"/>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Sarabun:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/flaticon.css"/>
+	<link rel="stylesheet" href="css/magnific-popup.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+
+
+	<!--[if lt IE 9]>
+		<script src="html5shiv.min.js"></script>
+		<script src="respond.min.js"></script>
+	<![endif]-->
+
+	<style type="text/css">
+.auto-style1 {
+	text-align: center;
+}
+.auto-style2 {
+	color: #00887A;
+}
+table
+    {
+	border: 3px #00887A solid;
+}
+    </style>
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section">
+		<!-- logo -->
+		<a href="home.php" >
+			<img src="img\logo.png" alt=" Logo" width="300" height="70">
+		</a>
+		<div class="nav-switch">
+			<i class="fa fa-bars"></i>
+		</div>
+		<div class="container">
+			<ul class="main-menu">
+				<li><a href="home.php">Home</a></li>
+				<li><a href="restaurant.php">Restaurant</a></li>
+				<li><a href="laundry.php">Laundry</a></li>
+				<li><a href="roomservice.php">Room Service</a></li>
+				<li><a href="spasaloon.php">Spa & Saloon</a></li>
+				<li><a href="cab.php">Book Cab</a></li>
+				<li><a href="contact.php">Contact Us</a></li>
+			</ul>
+			<p>&nbsp;</p>
+    <h1 class="auto-style1" style="height: 93px">
+	<span class="auto-style2" lang="en-in">LIST OF HOTELS</span></h1>
+    <br><br>
+    <button type="button" onclick="loadXML()">SHOW LIST</button>
+    <table id="demo" align="center"></table>
+    <script>
+        function loadXML()
+        {
+            var xhttp=new XMLHttpRequest();
+            xhttp.onreadystatechange=function()
+            {
+                if(this.readyState==4&&this.status==200)
+                {
+                    myFunction(this);
+                }
+            };
+            xhttp.open("GET","webdeveloper.xml",true);
+            xhttp.send();
+        }
+        function myFunction(xml)
+        {
+            var i;
+            var xmlDoc=xml.responseXML;
+            var t="<tr><th>NAME</th><th>RATINGS</th></tr>";
+            var x=xmlDoc.getElementsByTagName("hotel");
+            for(i=0;i<x.length;i++)
+            {
+                t +="<tr><td>" +
+                x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+                "</td><td>" +
+                x[i].getElementsByTagName("rating")[0].childNodes[0].nodeValue +
+                "</td></tr>";
+            }
+            document.getElementById("demo").innerHTML=t;
+        }
+    </script>
+			<?php
+session_start();
+$roomno=$_SESSION["room"];
+$soap=$_POST['soap'];
+$shampoo=$_POST['shampoo'];
+$body=$_POST['body'];
+$brush=$_POST['brush'];
+$paste=$_POST['paste'];
+$deo=$_POST['deo'];
+$bulb=$_POST['bulb'];
+$battery=$_POST['battery'];
+$cutlery=$_POST['cutlery'];
+$message=$_POST['message'];
+$con=new mysqli("localhost","root","","hotel");
+$check= "SELECT * from service where roomno='$roomno'";
+$res= mysqli_query($con,$check);
+$count= mysqli_num_rows($res);
+$ins= "INSERT into service(roomno,soap,shampoo,body,brush,paste,deo,bulb,battery,cutlery,message) values
+('$roomno','$soap','$shampoo','$body','$brush','$paste','$deo','$bulb','$battery','$cutlery','$message')";
+if($count!=0)
+{
+  {
+   echo "<script> alert('ROOM SERVICE PREVIOUSLY REQUESTED! REDIRECTING BACK TO HOMEPAGE');
+   window.location.href='home.php'</script>;";
+  }
+}
+else {
+if(($soap==0)&&($shampoo==0)&&($body==0)&&($brush==0)&&($paste==0)&&($deo==0)&&($bulb==0)&&($battery==0)&&($cutlery==0))
+{
+  echo "<script> alert('Select at least one');
+  history.back(); </script>";
+}
+else {
+  $query=mysqli_query($con,$ins);
+  echo "<script> alert('Service Request Sent');
+   window.location.href='roomservice.php'</script>;";
+
+}
+}
+
+
+
+ ?>
+			<p>&nbsp;</p>
+		</div>
+	</header>
+	<!-- Header section end -->
+
+	<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="img/page-top-bg/5.jpg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="page-top-text text-white">
+						<h2>Room Service</h2>
+						<p>With concierge we endeavour to provide a specific, up to the minute service. Our motto is to provide warm and personal service to make your stay a delight.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-social-warp">
+			<div class="hero-social">
+				<a href=""><i class="fa fa-facebook"></i></a>
+				<a href=""><i class="fa fa-linkedin"></i></a>
+				<a href=""><i class="fa fa-twitter"></i></a>
+				<a href=""><i class="fa fa-youtube-play"></i></a>
+				<a href=""><i class="fa fa-instagram"></i></a>
+				<a href="logout.php"><i><img src="img/logout.png"</i></a>
+			</div>
+		</div>
+	</section>
+	<!-- Page top section end -->
+
+	<!-- Developments section-->
+	<form action="roomservice1.php" method="post" class="subscribe-form">
+	<section class="developments-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="development-box">
+						<img src="img/developments/soap.jpg" height="300" width="300">
+						<div class="dev-text">
+							<h4>Soap </h4>
+							<p> Lather Up With These Natural Soapy WondersThe new soaps boast of high-quality ingredients and are infused with fragrant essential oils! That is gentle on your skin and gives you the fresh and rejuvenating experience. </p>
+							<input type="number" step="1" min="0" max="10" name="soap" value="0" title="Qty" class="input-text qty text" size="4" >
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="development-box">
+						<img src="img/developments/shampoo.jpg" height="300" width="300">
+						<div class="dev-text">
+							<h4>Shampoo</h4>
+							<p>Our shampoo is the latest generation hi-tech hair blackening product by applying Chinese Herbal Secret recipe with herbal extracts, for cuticle damage is small, low allergy, low stimulation and mild nature to hair, and can make hair manageable, black and lustrous with persistent effect.</p>
+							<input type="number" step="1" min="0" max="10" name="shampoo" value="0" title="Qty" class="input-text qty text" size="4" >
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="development-box">
+						<img src="img/developments/souffle.jpg" height="300" width="300">
+						<div class="dev-text">
+							<h4>Body souffle</h4>
+							<p> Extremely rich in tocopherols (Vitamin E), essential fatty acids and antioxidants, this natural oil helps to hydrate and nourish the skin to help improve its texture and tone. </p>
+							<input type="number" step="1" min="0" max="10" name="body" value="0" title="Qty" class="input-text qty text" size="4" >
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="development-box">
+						<img src="img/developments/brush.jpg" height="300" width="300">
+						<div class="dev-text">
+							<h4>Toothbrush</h4>
+							<p>Stylish Toothbrush by Default is designed by Simon Enever to complement your modern lifestyle. Each toothbrush is carefully engineered to be customizable to your brushing needs. </p>
+							<input type="number" step="1" min="0" max="10" name="brush" value="0" title="Qty" class="input-text qty text" size="4" >
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="development-box">
+						<img src="img/developments/paste.jpg" height="300" width="300">
+						<div class="dev-text">
+							<h4>Toothpaste</h4>
+							<p>Enriched with Vitamins A, C, and E to keep your teeth white, shining, and healthy. Comes in TSA-compliant 3.4oz tube Travel Friendly for on-the-go consumers.Combwide tooth design for a natural hair contour LIFETIME DURABILITY - High-Quality steel 8 wide teeth comb creates all diferent styles</p>
+							<input type="number" step="1" min="0" max="10" name="paste" value="0" title="Qty" class="input-text qty text" size="4" >
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="development-box">
+						<img src="img/developments/6.jpg" height="300" width="300">
+						<div class="dev-text">
+							<h4>Deodorant</h4>
+							<p>If its long-lasting comfort, refreshing formulations and iconic scents from your favourite perfume houses that you covet, look no further than our edit of luxury deodorants. </p>
+							<input type="number" step="1" min="0" max="10" name="deo" value="0" title="Qty" class="input-text qty text" size="4" >
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="development-box">
+						<img src="img/developments/bulb.jpg" height="300" width="300">
+						<div class="dev-text">
+							<h4>Light bulb </h4>
+							<p> Light your moments with ENERGY STAR certified LED bulbs. Only LED bulbs that have earned the ENERGY STAR are independently certified to deliver energy that don't strain your eye and help the environment.  </p>
+							<input type="number" step="1" min="0" max="10" name="bulb" value="0" title="Qty" class="input-text qty text" size="4" >
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="development-box">
+						<img src="img/developments/8.jpg" height="300" width="300">
+						<div class="dev-text">
+							<h4>Battery </h4>
+							<p> These set of rechargeable heavy duty batteries that comes handy for all your needs. </p>
+							<input type="number" step="1" min="0" max="10" name="battery" value="0" title="Qty" class="input-text qty text" size="4" >
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="development-box">
+						<img src="img/developments/9.jpg" height="300" width="300">
+						<div class="dev-text">
+							<h4>Cutlery  </h4>
+							<p>Cutlery to your dining table is the perfect finishing touch to any tablescape. Discover our range of luxury cutlery and invest in cutlery sets with a long-lasting promise by tailoring your table setting with stainless steel. </p>
+							<input type="number" step="1" min="0" max="10" name="cutlery" value="0" title="Qty" class="input-text qty text" size="4" >
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Developments section end-->
+
+	<!-- Subscribe section -->
+	<section class="subscribe-section spad">
+		<div class="container">
+				<input type="text" placeholder="Kindly mention additional services required" name="message">
+		</div>
+
+	</section>
+			<div align="center"><input type="submit" class="site-btn sb-solid" value="REQUEST SERVICE"></div><br>
+</form>
+	<!-- Subscribe section end-->
+
+	<!-- Footer section -->
+	<footer class="footer-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-5 col-md-2 col-sm-12">
+					<div class="footer-widget">
+						<img src=" img/logo.png" >
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-3 col-sm-4">
+					<div class="footer-widget">
+						<h5>COMPANY</h5>
+						<ul>
+							<li><a href="contact.php">About Us</a></li>
+							<li><a href="contact.php">Offices</a></li>
+							<li><a href="contact.php">Contact Us</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-3 col-sm-4">
+					<div class="footer-widget">
+						<h5>LEGAL</h5>
+						<ul>
+
+							<li><a href="terms&condition.php">Terms & Condition</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 col-sm-4">
+					<div class="footer-widget">
+						<h5>SOCIAL</h5>
+						<div class="footer-social">
+							<a href=""><i class="fa fa-facebook"></i></a>
+							<a href=""><i class="fa fa-linkedin"></i></a>
+							<a href=""><i class="fa fa-twitter"></i></a>
+							<a href=""><i class="fa fa-youtube-play"></i></a>
+							<a href=""><i class="fa fa-instagram"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="copyright">
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by LODGE-A-RITHM Co.</a>
+</div>
+		</div>
+	</footer>
+	<!-- Footer section end-->
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
